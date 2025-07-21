@@ -1,6 +1,7 @@
 
 import BSTree.BusTree;
 import Entities.Bus;
+import LinkedList.CustomerList;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,6 +20,7 @@ public class Program {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BusTree busTree = new BusTree();
+        CustomerList customerList = new CustomerList();
         //...
 
         while (true) { 
@@ -35,7 +37,7 @@ public class Program {
                         busMenu(scanner, busTree);
                         break;
                     case 2:
-                        // customerMenu(scanner, ...);
+                        customerMenu(scanner, customerList);
                         break;
                     case 3:
                         // bookingMenu(scanner, ...);
@@ -149,6 +151,63 @@ public class Program {
                         return;
                     default:
                         System.out.println("Invalid choice. Please choose 0-9.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }         
+        }
+    }
+    private static void customerMenu(Scanner scanner, CustomerList customerList) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\r\n=================== CUSTOMER MENU ===================");
+            System.out.println("1. Load data from file");
+            System.out.println("2. Input and add to the end");
+            System.out.println("3. Display all customers");
+            System.out.println("4. Save customer list to file");
+            System.out.println("5. Search by customer code");
+            System.out.println("6. Delete by customer code");
+            System.out.println("0. Back to main menu");
+            System.out.print("\r\nEnter your choice (0-6): ");
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter file path to load customer data: ");
+                        String loadPath = sc.nextLine();
+                        customerList.loadFromFile(loadPath);
+                        break;
+                    case 2:
+                        customerList.inputAndAdd(sc);
+                        break;
+                    case 3:
+                        System.out.println("Customer list:");
+                        customerList.display();
+                        break;
+                    case 4:
+                        System.out.print("Enter file path to save customer data: ");
+                        String savePath = sc.nextLine();
+                        customerList.saveToFile(savePath);
+                        break;
+                    case 5:
+                        System.out.print("Enter customer code to search: ");
+                        String code = sc.nextLine();
+                        var found = customerList.searchByCode(code);
+                        if (found != null) {
+                            System.out.println("Found: " + found.getCustomerName() + " | " + found.getPhone());
+                        } else {
+                            System.out.println("No customer found with code " + code);
+                        }
+                        break;
+                    case 6:
+                        System.out.print("Enter customer code to delete: ");
+                        String deleteCode = sc.nextLine();
+                        customerList.deleteByCode(deleteCode);
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        System.out.println("Invalid choice. Please choose 0-6.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
