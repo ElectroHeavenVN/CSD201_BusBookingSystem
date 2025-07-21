@@ -8,6 +8,25 @@ package LinkedList;
  *
  * @author EHVN
  */
-public abstract class Node {
-    
+public class Node {
+    private INodeValue value;
+    private Node next;
+
+    public Node(INodeValue value) {
+        this.value = value;
+        this.next = null;
+    }
+
+    public INodeValue getValue() {
+        return value;
+    }
+    public void setValue(INodeValue value) {
+        this.value = value;
+    }
+    public Node getNext() {
+        return next;
+    }
+    public void setNext(Node next) {
+        this.next = next;
+    }
 }

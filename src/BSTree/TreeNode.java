@@ -8,6 +8,6 @@ package BSTree;
  *
  * @author EHVN
  */
-public abstract class TreeNode {
+public class TreeNode {
     
 }

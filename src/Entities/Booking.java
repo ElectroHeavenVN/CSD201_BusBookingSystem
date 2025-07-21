@@ -4,11 +4,13 @@
  */
 package Entities;
 
+import LinkedList.INodeValue;
+
 /**
  *
  * @author EHVN
  */
-public class Booking {
+public class Booking implements INodeValue {
     public String busCode;
     public String customerCode;
     public int seat;

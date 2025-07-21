@@ -4,11 +4,13 @@
  */
 package Entities;
 
+import LinkedList.INodeValue;
+
 /**
  *
  * @author EHVN
  */
-public class Customer {
+public class Customer implements INodeValue {
     public String code;
     public String customerName;
     public String phone;

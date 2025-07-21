@@ -8,6 +8,6 @@ package BSTree;
  *
  * @author EHVN
  */
-public abstract class BinarySearchTree {
+public class BinarySearchTree {
     
 }
