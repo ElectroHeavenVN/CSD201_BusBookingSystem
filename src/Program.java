@@ -1,6 +1,7 @@
 
 import BSTree.BusTree;
 import Entities.Bus;
+import LinkedList.BookingList;
 import LinkedList.CustomerList;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,7 +41,7 @@ public class Program {
                         customerMenu(scanner, customerList);
                         break;
                     case 3:
-                        // bookingMenu(scanner, ...);
+                        bookingMenu(scanner, busTree, customerList);
                         break;
                     case 0:
                         System.out.println("Exiting program...");
@@ -157,6 +158,7 @@ public class Program {
             }         
         }
     }
+
     private static void customerMenu(Scanner scanner, CustomerList customerList) {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -208,6 +210,42 @@ public class Program {
                         return;
                     default:
                         System.out.println("Invalid choice. Please choose 0-6.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
+
+    private static void bookingMenu(Scanner scanner, BusTree busTree, CustomerList customerList) {
+        Scanner sc = new Scanner(System.in);
+        BookingList bookingList = new BookingList();
+        while (true) {
+            System.out.println("\r\n=================== BOOKING MENU ===================");
+            System.out.println("1. Input and add booking");
+            System.out.println("2. Display all bookings");
+            System.out.println("3. Sort bookings by bus code and customer code");
+            System.out.println("0. Back to main menu");
+            System.out.print("\r\nEnter your choice (0-3): ");
+            try {
+                int choice = Integer.parseInt(sc.nextLine());
+                switch (choice) {
+                    case 1:
+                        if (!bookingList.inputAndAdd(sc, busTree, customerList)) {
+                            System.out.println("Failed to add booking.");
+                        }
+                        break;
+                    case 2:
+                        bookingList.display();
+                        break;
+                    case 3:
+                        bookingList.sortByBcodeCcode();
+                        System.out.println("Bookings sorted successfully.");
+                        break;
+                    case 0:
+                        return;
+                    default:
+                        System.out.println("Invalid choice. Please choose 0-3.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
